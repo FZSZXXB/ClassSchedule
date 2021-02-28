@@ -36,12 +36,12 @@
     [{index: '7', name: '15:55'}, 1],
     [{index: '8', name: '16:50'}, 1]
   ];
-  // 实例化(初始化课表)
   var Timetable;
   var gradeId = -1;
   var classId = -1;
   var styles = {
     Gheight: 50,
+    // 改课表颜色
     palette: ['#cbacac', '#cbb4ac', '#cbbbac', '#cbc3ac', '#cbcbac', '#c3cbac', '#bbcbac', '#b4cbac', '#accbac', '#accbb4', '#accbbb', '#accbc3', '#accbcb', '#acc3cb', '#acbbcb','#acb4cb','#acaccb','#b4accb','#bbaccb','#c3accb','#cbaccb','#cbacc3','#cbacbb','#cbacb4','#cbacac']
   }
   // if IE
