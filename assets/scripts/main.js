@@ -108,7 +108,14 @@ function ref(){
       week: week,
       styles: styles,
       timetableType: courseType,
-      gridOnClick: function (e) {}
+      gridOnClick: function (e) {
+        if (e.name == '') {
+          alert("这一节没有课哦");
+        } else {
+          alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
+        }
+        console.log(e);
+      }
     });
   }
 
@@ -121,16 +128,7 @@ IEContentLoaded(window,function () {
     week: week,
     timetableType: courseType,
     highlightWeek: day,
-    gridOnClick: function (e) {
-      // if( tableReady == true ) {
-      // if (e.name == '') {
-      //   alert("这一节没有课哦");
-      // } else {
-      //   alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
-      // }
-      // console.log(e);
-      // }
-    },
+    gridOnClick: function (e) {},
     styles: styles
   });
 })
