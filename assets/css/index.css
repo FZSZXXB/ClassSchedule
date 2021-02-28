@@ -90,7 +90,7 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.btn-onChange {
+#btn-onChange {
     background-color: #23a1e0de; 
     color: #fff; 
     padding: 5px 10px; 
@@ -98,7 +98,7 @@
     border: none;
 }
 
-.loadImg {
+#loadImg {
     position:relative;
     top:10px;
     width:35px;

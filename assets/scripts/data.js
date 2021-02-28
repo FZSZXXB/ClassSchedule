@@ -26,7 +26,7 @@ var courseList = [
 
 ]];
 
-document.getElementsByClassName('btn-onChange')[0].disabled = false;
-document.getElementsByClassName('loadImg')[0].style="visibility:hidden;";
-document.getElementsByClassName('loadTip')[0].style="visibility:hidden;";
+document.getElementById('btn-onChange').disabled = false;
+document.getElementById('loadImg').style="visibility:hidden;";
+document.getElementById('loadTip').style="visibility:hidden;";
 console.log("data Loaded.");
