@@ -26,7 +26,6 @@ var courseList = [
 
 ]];
 
-document.getElementById('btn-onChange').disabled = false;
 document.getElementById('loadImg').style="visibility:hidden;";
 document.getElementById('loadTip').style="visibility:hidden;";
 console.log("data Loaded.");
