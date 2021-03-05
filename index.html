@@ -13,14 +13,14 @@
         <br>
         <a>年级</a>
            <select id="gradeSel" onchange="gradeId = parseInt(this.value);ref();">
-            <option value="-1">---</option>
+            <option value="-1">请选择年级</option>
             <option value="0">高一</option>
             <option value="1">高二</option>
             <option value="2">高三</option>
         </select>
         <a>班级</a>
            <select id="classSel" onchange="classId = parseInt(this.value);ref();">
-            <option value="-1">---</option>
+            <option value="-1">请选择班级</option>
             <option value="0">1</option>
             <option value="1">2</option>
             <option value="2">3</option>
@@ -35,8 +35,6 @@
             <option value="11">12</option>
             <option value="12">13</option>
             <option value="13">14</option>
-            <option value="14">15</option>
-            <option value="15">16</option>
         </select>
             <img id="loadImg" src="./assets/imgs/loading.svg">
             <!-- loading 图片来自 loading.io -->
@@ -44,8 +42,9 @@
     </div>
     <div id="coursesTable"></div>
     <footer>
+        数据来源：校智达<br>
         Copyright &copy; Hao_cen<br>
-        Last Update 2021-02-28<br>
+        Last Update 2021-03-05<br>
         <a href="https://github.com/Haocen2004/ClassSchedule">Source Code</a>
     </footer>
 </body>
