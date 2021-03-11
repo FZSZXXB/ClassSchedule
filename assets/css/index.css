@@ -1,5 +1,5 @@
 #coursesTable {
-    padding: 15px 10px;
+    padding: 0px 0px;
 }
 
 .Courses-head {
@@ -7,6 +7,7 @@
 }
 
 .Courses-head > div {
+    width: 19.2%;
     text-align: center;
     font-size: 14px;
     line-height: 28px;
@@ -17,6 +18,7 @@
 }
 
 .Courses-leftHand {
+
     background-color: #f2f6f7;
     font-size: 12px;
 }
@@ -39,7 +41,8 @@
     border-left: none !important;
 }
 
-.Courses-leftHand > div {
+.Courses-leftHand div {
+    margin: 2px;
     padding-top: 5px;
     border-bottom: 1px dashed rgb(219, 219, 219);
 }
@@ -66,19 +69,23 @@
 }
 
 .Courses-content li {
+    width: 19.2%;
+    margin: 1px 1px;
     text-align: center;
     color: #666666;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 50px;
+    border-radius: 10px;
 }
 
 .Courses-content li span {
+    margin: 1px 1px;
     padding: 6px 2px;
     box-sizing: border-box;
     line-height: 18px;
-    border-radius: 4px;
+    border-radius: 10px;
     white-space: none;
-    word-break: break-all;
+    word-break: keep-all;
     cursor: pointer;
 }
 
@@ -88,14 +95,6 @@
 
 .grid-active span {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-#btn-onChange {
-    background-color: #23a1e0de; 
-    color: #fff; 
-    padding: 5px 10px; 
-    border-radius: 4px;
-    border: none;
 }
 
 #loadImg {

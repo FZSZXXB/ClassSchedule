@@ -19,6 +19,13 @@
     [' ', '  ', ' ', '  ', '班', '  ', ' ', '  '],
     [' ', '  ', ' ', '  ', '级', '  ', ' ', '  ']
   ];
+  var courseListNoM = [
+    [' ', '  ', ' ', '  ', '请', '  ', ' ', '  '],
+    [' ', '  ', ' ', '  ', '选', '  ', ' ', '  '],
+    [' ', '  ', ' ', '  ', '择', '  ', ' ', '  '],
+    [' ', '  ', ' ', '  ', '选', '  ', ' ', '  '],
+    [' ', '  ', ' ', '  ', '科', '  ', ' ', '  ']
+  ];
   var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五'] :
     ['一', '二', '三', '四', '五'];
   var now = new Date();
@@ -36,10 +43,13 @@
   var Timetable;
   var gradeId = -1;
   var classId = -1;
+  var gaoKaoMajor = -1;
+  var tempGradeId = -1;
+  var tempClassId = -1;
   var styles = {
     Gheight: 50,
     // 改课表颜色
-    palette: ['#cbacac', '#cbb4ac', '#cbbbac', '#cbc3ac', '#cbcbac', '#c3cbac', '#bbcbac', '#b4cbac', '#accbac', '#accbb4', '#accbbb', '#accbc3', '#accbcb', '#acc3cb', '#acbbcb','#acb4cb','#acaccb','#b4accb','#bbaccb','#c3accb','#cbaccb','#cbacc3','#cbacbb','#cbacb4','#cbacac']
+    // palette: ['#cbacac', '#cbb4ac', '#cbbbac', '#cbc3ac', '#cbcbac', '#c3cbac', '#bbcbac', '#b4cbac', '#accbac', '#accbb4', '#accbbb', '#accbc3', '#accbcb', '#acc3cb', '#acbbcb','#acb4cb','#acaccb','#b4accb','#bbaccb','#c3accb','#cbaccb','#cbacc3','#cbacbb','#cbacb4','#cbacac']
   }
   // if IE
 function IEContentLoaded (w, fn) {
@@ -100,20 +110,62 @@ function ref(){
       gridOnClick: function (e) {}
     });
   } else {
-    Timetable.setOption({
-      timetables: courseList[gradeId][classId],
-      week: week,
-      styles: styles,
-      timetableType: courseType,
-      gridOnClick: function (e) {
-        if (e.name == '') {
-          alert("这一节没有课哦");
-        } else {
-          alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
+    if (gaoKaoMajorList[gradeId][classId].length == 1){
+      document.getElementById('gaokao_major').style="display:none;";
+      Timetable.setOption({
+        timetables: courseList[gradeId][classId],
+        week: week,
+        styles: styles,
+        timetableType: courseType,
+        gridOnClick: function (e) {
+          if (e.name == '') {
+            alert("这一节没有课哦");
+          } else {
+            alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
+          }
+          console.log(e);
         }
-        console.log(e);
+      });
+    } else {
+      document.getElementById('gaokao_major').style="display:inline;";
+      console.log(gaoKaoMajor);
+      if (tempClassId != classId || tempGradeId != tempGradeId) {
+        tempClassId = classId;
+        tempGradeId = gradeId;
+        gaoKaoMajor = -1;
+        var majorSel = document.querySelector('#gaoKaoSel');
+        majorSel.options.length = 0;
+        majorSel.options.add(new Option("请选择科目",-1))
+        gaoKaoMajorList[gradeId][classId].forEach(element => {
+          console.log(element);
+          majorSel.options.add(new Option(element,majorSel.options.length-1))
+        });
       }
-    });
+        if (gaoKaoMajor != -1){
+          Timetable.setOption({
+            timetables: courseList[gradeId][classId][gaoKaoMajor],
+            week: week,
+            styles: styles,
+            timetableType: courseType,
+            gridOnClick: function (e) {
+              if (e.name == '') {
+                alert("这一节没有课哦");
+              } else {
+                alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
+              }
+              console.log(e);
+            }
+          });
+        } else {
+          Timetable.setOption({
+            timetables: courseListNoM,
+            week: week,
+            styles: styles,
+            timetableType: courseType,
+            gridOnClick: function (e) {}
+          });
+        }
+    }
   }
 
 }
@@ -129,3 +181,5 @@ IEContentLoaded(window,function () {
     styles: styles
   });
 })
+
+
