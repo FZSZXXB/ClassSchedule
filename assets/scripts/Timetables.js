@@ -12,7 +12,7 @@
       this.leftHandWidth = styles.leftHandWidth || 40;
       this.Gheight = styles.Gheight || 48;
       // this.defaultPalette = ['#f05261', '#169EF3', '#3f9900', '#52db9a', '#D570F6', '#3f51b5', '#f3d147', '#673ab7', '#f3db49', '#76bfcd', '#b495e1', '#ff9800', '#8bc34a', '#ffb6c1', '#dc143c', '#ffa500', '#66ccff'];
-      this.defaultPalette = ['#F44336d8', '#E91E63d8', '#9C27B0d8', '#673AB7d8', '#3F51B5d8', '#2196F3d8', '#03A9F4d8', '#00BCD4d8', '#009688d8', '#4CAF50d8', '#8BC34Ad8', '#CDDC39d8', '#FFC107d8', '#FF9800d8', '#FF5722d8', '#795548d8', '#9E9E9Ed8', '#607D8Bd8', '#66ccff'];
+      this.defaultPalette = ['#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E', '#607D8B', '#66ccff'];
       this.palette = (typeof styles.palette === 'boolean' && !styles.palett) ? false : (styles.palette || []).concat(this.defaultPalette)
       this._init();
     };
@@ -158,7 +158,6 @@
                 if (classIndex > (palette.length -1)) {
                   classIndex = classIndex - palette.length;
                 }
-
                 mergeDom.style.backgroundColor = palette[classIndex];
                 mergeDom.style.color = '#fff';
 
@@ -182,9 +181,8 @@
                   classIndex = classIndex - palette.length;
 
                 }
-                  courseItem.style.backgroundColor = palette[classIndex];
-                  courseItem.style.color = '#fff';
-
+                courseItem.style.backgroundColor = palette[classIndex];
+                courseItem.style.color = '#fff';
                 } else if (item) {
                   courseItem.className = 'course-hasContent'
                 }

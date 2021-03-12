@@ -83,7 +83,6 @@ function IEContentLoaded (w, fn) {
 }
 
 function ref(){
-  console.log("trigger")
   if (gradeId == -1) {
     if (classId == -1) {    
       Timetable.setOption({
@@ -128,7 +127,6 @@ function ref(){
       });
     } else {
       document.getElementById('gaokao_major').style="display:inline;";
-      console.log(gaoKaoMajor);
       if (tempClassId != classId || tempGradeId != tempGradeId) {
         tempClassId = classId;
         tempGradeId = gradeId;
@@ -137,7 +135,6 @@ function ref(){
         majorSel.options.length = 0;
         majorSel.options.add(new Option("请选择科目",-1))
         gaoKaoMajorList[gradeId][classId].forEach(element => {
-          console.log(element);
           majorSel.options.add(new Option(element,majorSel.options.length-1))
         });
       }
@@ -169,8 +166,8 @@ function ref(){
   }
 
 }
-
 IEContentLoaded(window,function () {
+  console.log('Main Schedule Loading...');
   Timetable = new Timetables({
     el: '#coursesTable',
     timetables: courseListNoAll,
@@ -180,6 +177,6 @@ IEContentLoaded(window,function () {
     gridOnClick: function (e) {},
     styles: styles
   });
-})
-
+  console.log('Main Schedule Loaded.');
+});
 
