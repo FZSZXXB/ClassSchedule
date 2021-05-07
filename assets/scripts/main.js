@@ -26,6 +26,24 @@
     [' ', '  ', ' ', '  ', '选', '  ', ' ', '  '],
     [' ', '  ', ' ', '  ', '科', '  ', ' ', '  ']
   ];
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) 
+  {
+    var c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+function setCookie(cname,cvalue) {
+  var d = new Date();
+  // d.setTime(d.getTime()+(exdays*24*60*60*1000));
+  var expires = "expires="+d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + (new Date()).valueOf()+10000000000;
+}
+  var dataLoaded = false;
   var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五'] :
     ['一', '二', '三', '四', '五'];
   var now = new Date();
@@ -83,6 +101,7 @@ function IEContentLoaded (w, fn) {
 }
 
 function ref(){
+  // alert(gradeId+"\n"+classId+"\n"+gaoKaoMajor);
   if (gradeId == -1) {
     if (classId == -1) {    
       Timetable.setOption({
@@ -125,6 +144,10 @@ function ref(){
           console.log(e);
         }
       });
+      setCookie("gradeId",gradeId);
+      setCookie("classId",classId);
+      setCookie("gaoKaoMajor",gaoKaoMajor);
+      setCookie("hasData",true);
     } else {
       document.getElementById('gaokao_major').style="display:inline;";
       if (tempClassId != classId || tempGradeId != tempGradeId) {
@@ -153,6 +176,10 @@ function ref(){
               console.log(e);
             }
           });
+          setCookie("gradeId",gradeId);
+          setCookie("classId",classId);
+          setCookie("gaoKaoMajor",gaoKaoMajor);
+          setCookie("hasData",true);
         } else {
           Timetable.setOption({
             timetables: courseListNoM,
@@ -166,6 +193,21 @@ function ref(){
   }
 
 }
+function loadFromCookie() {
+  if (getCookie("hasData")) {
+    if (dataLoaded) {
+    gradeId = getCookie("gradeId");
+    document.getElementById("gradeSel").value=gradeId;
+    classId = getCookie("classId");
+    document.getElementById("classSel").value=classId;
+    gaoKaoMajor = getCookie("gaoKaoMajor");
+    document.getElementById("gaoKaoSel").value=gaoKaoMajor;
+      ref();
+    } else {
+      setTimeout("loadFromCookie();",500);
+    }
+  }
+}
 IEContentLoaded(window,function () {
   console.log('Main Schedule Loading...');
   Timetable = new Timetables({
@@ -178,5 +220,5 @@ IEContentLoaded(window,function () {
     styles: styles
   });
   console.log('Main Schedule Loaded.');
+  loadFromCookie();
 });
-

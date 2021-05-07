@@ -60,3 +60,4 @@ var courseList = [[
 document.getElementById('loadImg').style="display:none;";
 document.getElementById('loadTip').style="display:none;";
 console.log("data Loaded.");
+dataLoaded = true;
