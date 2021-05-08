@@ -28,20 +28,28 @@
   ];
 
 function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i=0; i<ca.length; i++) 
-  {
-    var c = ca[i].trim();
-    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  if (typeof(Storage)!=='undefined') {
+    return localStorage.getItem(cname);
+  } else {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) 
+    {
+      var c = ca[i].trim();
+      if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+    }
+    return "";
   }
-  return "";
 }
 function setCookie(cname,cvalue) {
-  var d = new Date();
-  // d.setTime(d.getTime()+(exdays*24*60*60*1000));
-  var expires = "expires="+d.toGMTString();
-  document.cookie = cname + "=" + cvalue + "; " + (new Date()).valueOf()+10000000000;
+  if (typeof(Storage)!=='undefined') {
+    localStorage.setItem(cname,cvalue);
+  } else {
+    var d = new Date();
+    // d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + (new Date()).valueOf()+10000000000;
+  }
 }
   var dataLoaded = false;
   var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五'] :
