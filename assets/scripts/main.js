@@ -26,8 +26,8 @@
     [' ', '  ', ' ', '  ', '选', '  ', ' ', '  '],
     [' ', '  ', ' ', '  ', '科', '  ', ' ', '  ']
   ];
-
-function getCookie(cname) {
+//first try localStorage
+function getData(cname) {
   if (typeof(Storage)!=='undefined') {
     return localStorage.getItem(cname);
   } else {
@@ -41,7 +41,7 @@ function getCookie(cname) {
     return "";
   }
 }
-function setCookie(cname,cvalue) {
+function setData(cname,cvalue) {
   if (typeof(Storage)!=='undefined') {
     localStorage.setItem(cname,cvalue);
   } else {
@@ -152,10 +152,10 @@ function ref(){
           console.log(e);
         }
       });
-      setCookie("gradeId",gradeId);
-      setCookie("classId",classId);
-      setCookie("gaoKaoMajor",gaoKaoMajor);
-      setCookie("hasData",true);
+      setData("gradeId",gradeId);
+      setData("classId",classId);
+      setData("gaoKaoMajor",gaoKaoMajor);
+      setData("hasData",true);
     } else {
       document.getElementById('gaokao_major').style="display:inline;";
       if (tempClassId != classId || tempGradeId != tempGradeId) {
@@ -184,10 +184,10 @@ function ref(){
               console.log(e);
             }
           });
-          setCookie("gradeId",gradeId);
-          setCookie("classId",classId);
-          setCookie("gaoKaoMajor",gaoKaoMajor);
-          setCookie("hasData",true);
+          setData("gradeId",gradeId);
+          setData("classId",classId);
+          setData("gaoKaoMajor",gaoKaoMajor);
+          setData("hasData",true);
         } else {
           Timetable.setOption({
             timetables: courseListNoM,
@@ -201,19 +201,25 @@ function ref(){
   }
 
 }
-function loadFromCookie() {
-  if (getCookie("hasData")) {
-    if (dataLoaded) {
-    gradeId = getCookie("gradeId");
-    document.getElementById("gradeSel").value=gradeId;
-    classId = getCookie("classId");
-    document.getElementById("classSel").value=classId;
-    gaoKaoMajor = getCookie("gaoKaoMajor");
-    document.getElementById("gaoKaoSel").value=gaoKaoMajor;
+function loadLocalData() {
+  if (dataLoaded) {
+    if (getData("hasData")) {
+      gradeId = getData("gradeId");
+      document.getElementById("gradeSel").value=gradeId;
+      console.log("gradeId: "+gradeId);
+      classId = getData("classId");
+      document.getElementById("classSel").value=classId;
+      console.log("classId: "+ classId);
+      gaoKaoMajor = getData("gaoKaoMajor");
+      document.getElementById("gaoKaoSel").value=gaoKaoMajor;
+      console.log('gaoKaoMajor: '+gaoKaoMajor);
+      console.log('Local data load success.');
       ref();
     } else {
-      setTimeout("loadFromCookie();",500);
+      console.log('Local data not found. Init blank Schedule.');
     }
+  } else {
+    setTimeout("loadLocalData();",500);
   }
 }
 IEContentLoaded(window,function () {
@@ -228,5 +234,6 @@ IEContentLoaded(window,function () {
     styles: styles
   });
   console.log('Main Schedule Loaded.');
-  loadFromCookie();
+  console.log('Waiting for Data Loading...');
+  loadLocalData();
 });
