@@ -7,6 +7,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>课程表</title>
     <link href="./assets/css/index.css" type="text/css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json" />
+    <script>
+        if (navigator.serviceWorker != null) {
+            navigator.serviceWorker.register('sw.js')
+            .then(function(registration) {
+            console.log('Registered events at scope: ', registration.scope);
+            });
+        }
+    </script>
+
 </head>
 <body>
     <div id="control_table">
